@@ -1,0 +1,42 @@
+{
+  "APIKEY": "your-secret-key",
+  "PROXY_URL": "http://127.0.0.1:7890",
+  "LOG": true,
+  "API_TIMEOUT_MS": 600000,
+  "NON_INTERACTIVE_MODE": false,
+  "Providers": [
+    {
+      "name": "openrouter",
+      "api_base_url": "https://openrouter.ai/api/v1/chat/completions",
+      "api_key": "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",
+      "models": [
+        "google/gemini-3-pro-preview",
+        "anthropic/claude-opus-4.5",
+        "anthropic/claude-sonnet-4.5"
+      ],
+      "transformer": {
+        "use": [
+          "openrouter"
+        ]
+      }
+    },
+   {
+      "name": "siliconflow",
+      "api_base_url": "https://api.siliconflow.cn/v1/chat/completions",
+      "api_key": "sk-ifbqfpjtxddzpvgfigwwcsxsikmpooxovprisdhjyehngmwh",
+      "models": [
+        "moonshotai/Kimi-K2-Thinking",
+        "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+        "zai-org/GLM-4.6"
+      ]
+    }   
+  ],
+  "Router": {
+    "default": "siliconflow,moonshotai/Kimi-K2-Thinking",
+    "background": "openrouter,google/gemini-3-pro-preview",
+    "think": "openrouter,anthropic/claude-opus-4.5",
+    "longContext": "openrouter,google/gemini-3-pro-preview",
+    "longContextThreshold": 60000,
+    "webSearch": "openrouter,google/gemini-3-pro-preview"
+  }
+}
