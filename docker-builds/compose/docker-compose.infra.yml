@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    container_name: ${COMPOSE_PROJECT_NAME}-db
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      POSTGRES_DB: metasfresh
+      POSTGRES_USER: metasfresh
+      POSTGRES_PASSWORD: metasfresh
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - ${DATA_DIR}/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U metasfresh"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3.9.13-management
+    container_name: ${COMPOSE_PROJECT_NAME}-rabbitmq
+    ports:
+      - "${RABBITMQ_PORT}:5672"
+      - "${RABBITMQ_MGMT_PORT}:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: metasfresh
+      RABBITMQ_DEFAULT_PASS: metasfresh
+      RABBITMQ_DEFAULT_VHOST: /
+    volumes:
+      - ${DATA_DIR}/rabbitmq:/var/lib/rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics -q status
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  elasticsearch:
+    image: elasticsearch:7.17.8
+    container_name: ${COMPOSE_PROJECT_NAME}-es
+    ports:
+      - "${ES_PORT}:9200"
+      - "${ES_TRANSPORT_PORT}:9300"
+    environment:
+      - discovery.type=single-node
+      - LOG4J_FORMAT_MSG_NO_LOOKUPS=true
+      - "ES_JAVA_OPTS=${ES_JAVA_OPTS}"
+    volumes:
+      - ${DATA_DIR}/elasticsearch:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail --silent http://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"\\|\"status\":\"yellow\"'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  postgres:
+  rabbitmq:
+  elasticsearch:
