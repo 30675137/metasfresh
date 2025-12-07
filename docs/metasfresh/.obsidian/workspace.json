@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Welcome.md",
+                "file": "01-getting-started/02-environment-setup.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Welcome"
+              "title": "02-environment-setup"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Welcome.md",
+                "file": "01-getting-started/02-environment-setup.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Welcome"
+              "title": "Backlinks for 02-environment-setup"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Welcome.md",
+                "file": "01-getting-started/02-environment-setup.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Welcome"
+              "title": "Outgoing links from 02-environment-setup"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Welcome.md",
+                "file": "01-getting-started/02-environment-setup.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Welcome"
+              "title": "Outline of 02-environment-setup"
             }
           }
         ]
@@ -183,10 +183,16 @@
       "bases:Create new base": false
     }
   },
-  "active": "4112f29f6ba7ee3a",
+  "active": "356f6ed738e80bdc",
   "lastOpenFiles": [
-    "02-fundamentals/02-architecture.md",
+    "09-tools/01-deployment-scripts.md",
+    "06-deployment/01-docker-deployment.md",
+    "02-fundamentals/01-project-overview.md",
+    "01-getting-started/DEPLOYMENT.md",
     "01-getting-started/01-quickstart.md",
+    "01-getting-started/02-environment-setup.md",
+    "Welcome.md",
+    "02-fundamentals/02-architecture.md",
     "assets/screenshots",
     "assets/images",
     "assets/diagrams",
@@ -197,7 +203,6 @@
     "08-features",
     "07-api",
     "06-deployment",
-    "README.md",
-    "Welcome.md"
+    "README.md"
   ]
 }
