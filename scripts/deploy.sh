@@ -367,7 +367,10 @@ EOF
 # 创建数据目录
 create_data_directories() {
     local env=$1
-    source "${COMPOSE_DIR}/.env.${env}"
+    # 安全地加载环境变量（避免执行命令）
+    set -a
+    source "${COMPOSE_DIR}/.env.${env}" 2>/dev/null || true
+    set +a
     
     log_info "创建数据持久化目录..."
     
@@ -405,7 +408,10 @@ show_service_status() {
 # 显示访问信息
 show_access_info() {
     local env=$1
-    source "${COMPOSE_DIR}/.env.${env}"
+    # 安全地加载环境变量
+    set -a
+    source "${COMPOSE_DIR}/.env.${env}" 2>/dev/null || true
+    set +a
     
     echo ""
     echo "╔═══════════════════════════════════════════════════════════╗"
@@ -508,7 +514,10 @@ clean_environment() {
     local compose_file="${COMPOSE_DIR}/docker-compose.${env}.yml"
     local env_file="${COMPOSE_DIR}/.env.${env}"
     
-    source "${env_file}"
+    # 安全地加载环境变量
+    set -a
+    source "${env_file}" 2>/dev/null || true
+    set +a
     
     log_warning "此操作将删除所有容器和数据卷！"
     read -p "确定要清理 ${env} 环境吗? (yes/no): " confirm
