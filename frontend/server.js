@@ -135,6 +135,14 @@ const devServer = new WebpackDevServer(
         secure: false,
         logLevel: 'debug',
       },
+      {
+        context: ['/stomp'],
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false,
+        ws: true,  // Enable WebSocket proxy
+        logLevel: 'debug',
+      },
     ],
 
     // Enhanced dev middleware options

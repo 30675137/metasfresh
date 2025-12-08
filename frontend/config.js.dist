@@ -1,5 +1,5 @@
 const config =  {
-  API_URL: 'http://localhost:8080/rest/api',
-  WS_URL: 'http://localhost:8080/stomp',
+  API_URL: '/rest/api',  // Use relative path for webpack-dev-server proxy
+  WS_URL: '/stomp',      // Use relative path for WebSocket
   GOOGLE_API: '',
 };
