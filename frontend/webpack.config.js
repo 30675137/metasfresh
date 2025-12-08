@@ -86,6 +86,12 @@ module.exports = {
     filename: '[name].bundle.js', // Simplified for development
     publicPath: '/',
   },
+  // File watching options to prevent EMFILE error
+  watchOptions: {
+    ignored: /node_modules/,
+    aggregateTimeout: 300,
+    poll: 1000, // Use polling to reduce file handles
+  },
   plugins,
   module: {
     rules: [
