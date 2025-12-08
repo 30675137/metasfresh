@@ -126,6 +126,17 @@ const devServer = new WebpackDevServer(
     hot: true,
     historyApiFallback: true,
 
+    // API proxy to solve CORS issues
+    proxy: [
+      {
+        context: ['/rest'],
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false,
+        logLevel: 'debug',
+      },
+    ],
+
     // Enhanced dev middleware options
     devMiddleware: {
       stats: {
