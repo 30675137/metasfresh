@@ -84,6 +84,15 @@
 📱 移动端：    http://localhost:8881
 ```
 
+**前端开发服务器（本地开发）：**
+
+```
+🔧 开发服务器： http://localhost:3000
+✅ 支持热重载
+✅ 实时编译
+✅ 错误提示
+```
+
 ### 🔧 管理界面（可选）
 
 | 服务 | 开发环境 | 测试环境 |
@@ -175,10 +184,36 @@ open http://localhost
 # 只启动 PostgreSQL + RabbitMQ + Elasticsearch
 ./deploy.sh start infra
 
-# 适合本地开发后端时使用
+# 适合本地开发前后端时使用
 ```
 
-### 场景 5：遇到问题，重新开始
+### 场景 5：前端开发（本地调试前端）
+
+```bash
+# 步骤1：启动基础设施（数据库、消息队列等）
+./deploy.sh start infra
+
+# 步骤2：进入前端目录
+cd frontend
+
+# 步骤3：安装依赖（首次需要）
+npm install
+
+# 步骤4：启动前端开发服务器
+./start.sh
+# 或使用 npm start
+
+# 步骤5：浏览器访问
+open http://localhost:3000
+```
+
+**前端开发服务器特性：**
+- ✅ 热重载（修改代码自动刷新）
+- ✅ 实时编译
+- ✅ 错误提示
+- ✅ 调试模式
+
+### 场景 6：遇到问题，重新开始
 
 ```bash
 # 清理环境（⚠️ 会删除所有数据）
@@ -277,6 +312,39 @@ kill -9 <PID>
 # ⚠️ 注意：会删除所有数据！
 ./deploy.sh clean dev
 ./deploy.sh start dev
+```
+
+### 问题 6：前端启动报错
+
+**症状：** `EMFILE: too many open files` 或 `digital envelope routines::unsupported`
+
+```bash
+# 方案1：使用项目提供的启动脚本（已自动修复）
+cd frontend
+./start.sh
+
+# 方案2：手动设置环境变量
+export NODE_OPTIONS=--openssl-legacy-provider
+npm start
+
+# 方案3：增加文件监听限制（macOS）
+ulimit -n 65536
+npm start
+```
+
+### 问题 7：前端端口被占用
+
+**症状：** 提示端口 3000 被占用
+
+```bash
+# 查找占用进程
+lsof -i :3000
+
+# 关闭进程
+kill -9 <PID>
+
+# 或使用其他端口
+PORT=3001 npm start
 ```
 
 ---
